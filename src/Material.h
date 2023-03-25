@@ -1,8 +1,6 @@
 #ifndef _MATERIAL_3D_H
 #define _MATERIAL_3D_H
 
-#include <math.h>
-#include <stdio.h>
 #include "FaceProperties.h"
 #include "Vector4D.h"
 

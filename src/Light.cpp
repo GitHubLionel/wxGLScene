@@ -2,7 +2,6 @@
  * https://www.khronos.org/registry/OpenGL-Refpages/gl2.1/xhtml/glLight.xml
  */
 #include "Light.h"
-#include <math.h>
 
 const TVector3D GLScene::GLDefaultLightPosition(50.0f, 150.0f, 100.0f);
 

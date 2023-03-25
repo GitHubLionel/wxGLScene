@@ -1,8 +1,6 @@
 #ifndef _SPIN_3D_H
 #define _SPIN_3D_H
 
-#include <math.h>
-#include <stdio.h>
 #include "Vector3D.h"
 #include "Vector4D.h"
 #include "Object3D.h"

@@ -3,7 +3,7 @@
 
 #include <stdio.h>
 #include <iostream>
-#include <math.h>
+#include <cmath>
 #include <initializer_list> // for std::initializer_list
 // we need OpenGL headers for GLfloat/GLint types used below
 #if defined(__WXMAC__)

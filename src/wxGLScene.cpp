@@ -1,5 +1,4 @@
 #include "wxGLScene.h"
-#include <string.h>
 #include <climits>
 #include "Axis.h"
 #include "Sphere.h"

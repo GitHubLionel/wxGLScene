@@ -1,5 +1,4 @@
 #include "Material.h"
-#include <math.h>
 #include "Object3D.h"
 
 TMaterial::TMaterial()

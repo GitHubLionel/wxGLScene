@@ -2,7 +2,6 @@
 #define _FACEPROPERTIES_H
 
 #include "Vector4D.h"
-#include <math.h>
 #include <initializer_list> // for std::initializer_list
 
 namespace GLScene

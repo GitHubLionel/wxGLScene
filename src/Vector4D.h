@@ -15,7 +15,7 @@
 	#include <GL/glu.h>
 #endif
 #include "Vector3D.h"
-#include <math.h>
+#include <cmath>
 #include <initializer_list> // for std::initializer_list
 
 namespace GLScene

@@ -1,5 +1,4 @@
 #include "Arrow.h"
-#include <math.h>
 
 TArrow::TArrow(GLfloat _len, GLfloat _radius, const TVector3D &pos) :
 		TBaseCylinder(_len, _radius, pos)

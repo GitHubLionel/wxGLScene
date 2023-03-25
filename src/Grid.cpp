@@ -1,5 +1,4 @@
 #include "Grid.h"
-#include <string.h>
 
 /**
  * TGrid class

@@ -14,8 +14,6 @@
 	#include <GL/gl.h>
 	#include <GL/glu.h>
 #endif
-#include <math.h>
-#include <stdio.h>
 #include "Vector3D.h"
 #include "Vector4D.h"
 #include "Material.h"
