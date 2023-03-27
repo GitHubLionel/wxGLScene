@@ -44,6 +44,8 @@ TCylinder::~TCylinder()
 
 void TCylinder::InitializeArray(void)
 {
+	FreeArray();
+
 	cylinder = new TVertex[cylinderLength];
 	base_up = new TVertex[baseLength];
 	base_down = new TVertex[baseLength];
@@ -68,15 +70,9 @@ void TCylinder::InitializeArray(void)
 
 void TCylinder::FreeArray(void)
 {
-	if (cylinder)
-		delete[] cylinder;
-	cylinder = NULL;
-	if (base_up)
-		delete[] base_up;
-	base_up = NULL;
-	if (base_down)
-		delete[] base_down;
-	base_down = NULL;
+	DeleteAndNull(cylinder);
+	DeleteAndNull(base_up);
+	DeleteAndNull(base_down);
 }
 
 void TCylinder::CreateCylinder(void)

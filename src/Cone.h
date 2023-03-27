@@ -27,7 +27,7 @@ class TCone: public TBaseCylinder
 
 		GLuint coneLength;
 		GLuint ConeSize;
-		TVertex *cone;    // "cone" triangles stored as triangle fan and polygon
+		TVertex *cone = NULL;    // "cone" triangles stored as triangle fan and polygon
 		GLuint vboId = 0;
 
 		void InitializeArray(void);

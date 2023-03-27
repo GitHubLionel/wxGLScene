@@ -14,9 +14,9 @@ GLuint arrowObjects[ARRAY_COUNT] = {0};
 
 #endif
 
-static TVertex *arrow;    // "arrow" triangles stored as triangle fan and polygon
-static TVertex *cylinder; // "cylinder walls" stored as quad strip
-static TVertex *base;     // "bottom cylinder" stored as polygon
+static TVertex *arrow = NULL;    // "arrow" triangles stored as triangle fan and polygon
+static TVertex *cylinder = NULL; // "cylinder walls" stored as quad strip
+static TVertex *base = NULL;     // "bottom cylinder" stored as polygon
 
 /**
  * Initialization of common array for all instances of TSpin (same len, same thickness)
@@ -62,6 +62,8 @@ TSpin::~TSpin()
 
 void TSpin::InitializeArray(void)
 {
+	FreeArray();
+
 	arrow = new TVertex[arrowLength];
 	cylinder = new TVertex[cylinderLength];
 	base = new TVertex[baseLength];
@@ -86,15 +88,9 @@ void TSpin::InitializeArray(void)
 
 void TSpin::FreeArray(void)
 {
-	if (arrow)
-		delete[] arrow;
-	arrow = NULL;
-	if (cylinder)
-		delete[] cylinder;
-	cylinder = NULL;
-	if (base)
-		delete[] base;
-	base = NULL;
+	DeleteAndNull(arrow);
+	DeleteAndNull(cylinder);
+	DeleteAndNull(base);
 }
 
 void TSpin::CreateSpin(void)

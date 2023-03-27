@@ -143,6 +143,21 @@ typedef union TVertex
 #define SIZE_USHORT(size)	((size) * sizeof(GLushort))
 #define SIZE_UINT(size)	((size) * sizeof(GLuint))
 
+/// An usefull shortcut to delete and null array structure
+/// Note the use of brace {} to enclose the operations
+#define DeleteAndNull(p)	\
+	{ if ((p) != NULL) \
+		{ delete [] (p);	\
+			(p) = NULL; }}
+
+/// An usefull shortcut to delete and null VBO array structure
+/// Note the use of brace {} to enclose the operations
+#define DeleteAndNullVBO(size, p)	\
+	{ if ((p) != 0) \
+		{ glDeleteBuffers(size, &p);	\
+			(p) = 0; }}
+
+
 extern const TVector3D GLDefaultPosition;
 
 /**

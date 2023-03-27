@@ -28,9 +28,9 @@ class TCylinder: public TBaseCylinder
 		GLuint cylinderLength;
 		GLuint baseLength;
 
-		TVertex *cylinder;   // "cylinder walls" stored as quad strip
-		TVertex *base_up;    // "up cylinder" stored as polygon
-		TVertex *base_down;  // "down cylinder" stored as polygon
+		TVertex *cylinder = NULL;   // "cylinder walls" stored as quad strip
+		TVertex *base_up = NULL;    // "up cylinder" stored as polygon
+		TVertex *base_down = NULL;  // "down cylinder" stored as polygon
 
 #ifdef USE_VBO    
 		GLuint arrowObjects[3] = {0};

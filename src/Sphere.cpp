@@ -83,35 +83,19 @@ void TSphere::InitializeArray(void)
 
 void TSphere::FreeArray(void)
 {
-	if (sphere)
-		delete[] sphere;
-	sphere = NULL;
-	if (indices)
-		delete[] indices;
-	indices = NULL;
-	if (sphere_low)
-		delete[] sphere_low;
-	sphere_low = NULL;
-	if (indices_low)
-		delete[] indices_low;
-	indices_low = NULL;
+	DeleteAndNull(sphere);
+	DeleteAndNull(indices);
+	DeleteAndNull(sphere_low);
+	DeleteAndNull(indices_low);
 }
 
 void TSphere::FreeVBO(void)
 {
 #ifdef USE_VBO
-	if (vboId != 0)
-		glDeleteBuffers(1, &vboId);
-	vboId = 0;
-	if (iboId != 0)
-		glDeleteBuffers(1, &iboId);
-	iboId = 0;
-	if (vboId_low != 0)
-		glDeleteBuffers(1, &vboId_low);
-	vboId_low = 0;
-	if (iboId_low != 0)
-		glDeleteBuffers(1, &iboId_low);
-	iboId_low = 0;
+	DeleteAndNullVBO(1, vboId);
+	DeleteAndNullVBO(1, iboId);
+	DeleteAndNullVBO(1, vboId_low);
+	DeleteAndNullVBO(1, iboId_low);
 #endif
 }
 

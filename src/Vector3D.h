@@ -295,6 +295,31 @@ typedef union TVector3D
 		}
 } TVector3D;
 
+
+/// Vectorial product
+inline TVector3D operator ^(const TVector3D &A, const TVector3D &B)
+{
+	TVector3D vects;
+
+	vects.X = (A.Y * B.Z - A.Z * B.Y);
+	vects.Y = (A.Z * B.X - A.X * B.Z);
+	vects.Z = (A.X * B.Y - A.Y * B.X);
+
+	return vects;
+}
+
+/// Vectorial product of a vector to a vector
+inline TVector3D& operator ^=(TVector3D &A, const TVector3D &B)
+{
+	TVector3D cpA = A;
+
+	A.X = (cpA.Y * B.Z - cpA.Z * B.Y);
+	A.Y = (cpA.Z * B.X - cpA.X * B.Z);
+	A.Z = (cpA.X * B.Y - cpA.Y * B.X);
+
+	return A;
+}
+
 /**
  * Some test operation
  */

@@ -31,6 +31,7 @@ TCone::~TCone()
 
 void TCone::InitializeArray(void)
 {
+	FreeArray();
 	cone = new TVertex[coneLength];
 
 	CreateCone();
@@ -50,9 +51,7 @@ void TCone::InitializeArray(void)
 
 void TCone::FreeArray(void)
 {
-	if (cone)
-		delete[] cone;
-	cone = NULL;
+	DeleteAndNull(cone);
 }
 
 void TCone::CreateCone(void)
