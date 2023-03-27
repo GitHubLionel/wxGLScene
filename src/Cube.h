@@ -1,8 +1,6 @@
 #ifndef _CUBE_3D_H
 #define _CUBE_3D_H
 
-#include "Vector3D.h"
-#include "Vector4D.h"
 #include "Object3D.h"
 
 namespace GLScene

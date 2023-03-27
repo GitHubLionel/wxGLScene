@@ -1,5 +1,6 @@
 #include "wxGLScene.h"
 #include <climits>
+#ifdef RUN_SAMPLE
 #include "Axis.h"
 #include "Sphere.h"
 #include "Arrow.h"
@@ -7,6 +8,7 @@
 #include "Cylinder.h"
 #include "Spin.h"
 #include "Cone.h"
+#endif
 
 #if (defined( __WXMSW__) || defined( __WXGTK__) || defined(__WXMAC__))
 #undef _UNICODE
@@ -977,6 +979,34 @@ void wxGLScene::OnUserMenu(wxCommandEvent &WXUNUSED(event))
 {
 	// Nothing to do here
 }
+
+/**
+ * GLEW Initialization
+ */
+#ifdef USE_GLEW
+void wxGLScene::InitGlew()
+{
+  static bool glewInitialized = false;
+  if (!glewInitialized)
+  {
+    glewInitialized = true;
+
+    glewExperimental = true;
+    GLenum err = glewInit();
+    if (GLEW_OK != err) {
+      // Problem: glewInit failed, something is seriously wrong !
+      fprintf(stderr, "GLEW: ERROR: GLEW initialization failed! We're going to keep going anyways, but we will most likely crash.\n");
+      fprintf(stderr, "GLEW: ERROR: %s\n", glewGetErrorString(err));
+    }
+    fprintf(stdout, "GLEW: Using GLEW %s\n", glewGetString(GLEW_VERSION));
+  }
+}
+
+const char *wxGLScene::GetGlewVersion()
+{
+  return (const char *)glewGetString(GLEW_VERSION);
+}
+#endif
 
 // FFMPEG encoder
 #ifdef USE_FFMPEG

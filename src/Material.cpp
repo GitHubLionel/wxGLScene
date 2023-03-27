@@ -1,5 +1,4 @@
 #include "Material.h"
-#include "Object3D.h"
 
 TMaterial::TMaterial()
 {
@@ -225,11 +224,6 @@ void TMaterial::ApplyMaterial(void)
 	glMaterialfv(GL_FRONT, GL_EMISSION, FrontProperties.Emission.Array());
 	glMaterialfv(GL_FRONT, GL_SPECULAR, FrontProperties.Specular.Array());
 	glMaterialfv(GL_FRONT, GL_SHININESS, &FrontProperties.Shininess);
-}
-
-TVector4D GLScene::RandomColor(void)
-{
-	return TVector4D(GLRand(1.0), GLRand(1.0), GLRand(1.0), 1.0);
 }
 
 // ********************************************************************************

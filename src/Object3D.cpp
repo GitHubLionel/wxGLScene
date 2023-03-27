@@ -2,6 +2,8 @@
 
 #ifdef USE_VBO
 
+#ifndef USE_GLEW
+
 #ifdef _WIN32
 
 PFNGLGENBUFFERSPROC glGenBuffers = NULL;
@@ -10,6 +12,7 @@ PFNGLBUFFERDATAPROC glBufferData = NULL;
 PFNGLBUFFERSUBDATAPROC glBufferSubData = NULL;
 PFNGLDELETEBUFFERSPROC glDeleteBuffers = NULL;
 PFNGLGETBUFFERPARAMETERIVPROC glGetBufferParameteriv = NULL;
+PFNGLACTIVETEXTUREPROC glActiveTexture = NULL;
 
 void initOGL()
 {
@@ -23,6 +26,7 @@ void initOGL()
 		glBufferSubData = (PFNGLBUFFERSUBDATAPROC) wglGetProcAddress("glBufferSubData");
 		glDeleteBuffers = (PFNGLDELETEBUFFERSPROC) wglGetProcAddress("glDeleteBuffers");
 		glGetBufferParameteriv = (PFNGLGETBUFFERPARAMETERIVPROC) wglGetProcAddress("glGetBufferParameteriv");
+		glActiveTexture = (PFNGLACTIVETEXTUREPROC) wglGetProcAddress("glActiveTexture");
 #pragma GCC diagnostic pop
 	}
 }
@@ -31,9 +35,16 @@ void initOGL()
 // Ne pas oublier le define GL_GLEXT_PROTOTYPES dans le projet
 void initOGL()
 {
-
+  // Nothing to do, Linux load library for us
 }
-#endif
+#endif // _WIN32
+
+#else
+void initOGL()
+{
+  // Nothing to do, glew make initialization for us
+}
+#endif // USE_GLEW
 
 GLuint createVBO(const void *data, int dataSize, GLenum target, GLenum usage)
 {
@@ -59,7 +70,7 @@ GLuint createVBO(const void *data, int dataSize, GLenum target, GLenum usage)
 	return id;
 }
 
-#endif
+#endif // USE_VBO
 
 const TVector3D GLScene::GLDefaultPosition(0.0f, 0.0f, 0.0f);
 
@@ -264,6 +275,11 @@ GLfloat GLScene::GLRand(void)
 GLfloat GLScene::GLRand(GLfloat max)
 {
 	return (GLfloat)(rand())/(RAND_MAX*1.0) * max;
+}
+
+TVector4D GLScene::RandomColor(void)
+{
+	return TVector4D(GLRand(1.0), GLRand(1.0), GLRand(1.0), 1.0);
 }
 
 // ********************************************************************************

@@ -1,8 +1,6 @@
 #ifndef _BASE_CYLINDER_3D_H
 #define _BASE_CYLINDER_3D_H
 
-#include "Vector3D.h"
-#include "Vector4D.h"
 #include "Object3D.h"
 
 namespace GLScene

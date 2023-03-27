@@ -12,26 +12,11 @@
     #error "OpenGL required: set wxUSE_GLCANVAS to 1 and rebuild the library"
 #endif
 
-// we need OpenGL headers for GLfloat/GLint types used below
-#if defined(__WXMAC__)
-	#ifdef __DARWIN__
-		#include <OpenGL/gl.h>
-		#include <OpenGL/glu.h>
-	#else
-		#include <gl.h>
-		#include <glu.h>
-	#endif
-#else
-	#include <GL/gl.h>
-	#include <GL/glu.h>
-#endif
-
+#include "Object3D.h" // IMPORTANT, must be declared before glcanvas !
 #include "wx/glcanvas.h"
 #include <initializer_list> // for std::initializer_list
 #include <vector>  // for std::vector
-#include "Vector3D.h"
-#include "Vector4D.h"
-#include "Object3D.h"
+
 #include "Light.h"
 #include "Camera.h"
 
@@ -238,7 +223,8 @@ class wxGLScene: public wxGLCanvas
 #endif
 
 #ifdef USE_GLEW
-    friend const char *GetGlewVersion();
+    void InitGlew();
+    const char *GetGlewVersion();
 #endif
 
 	wxDECLARE_NO_COPY_CLASS(wxGLScene);

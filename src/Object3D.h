@@ -1,19 +1,33 @@
 #ifndef _OBJECT_3D_H
 #define _OBJECT_3D_H
 
-// we need OpenGL headers for GLfloat/GLint types used below
+// OpenGL headers
 #if defined(__WXMAC__)
 	#ifdef __DARWIN__
-		#include <OpenGL/gl.h>
-		#include <OpenGL/glu.h>
+		#ifdef USE_GLEW
+			#include <OpenGL/glew.h> // IMPORTANT, must be declared before gl (and replace gl) !
+		#else
+			#include <OpenGL/gl.h>
+			#include <OpenGL/glu.h>
+		#endif
+
 	#else
-		#include <gl.h>
-		#include <glu.h>
+		#ifdef USE_GLEW
+			#include <glew.h> // IMPORTANT, must be declared before gl (and replace gl) !
+		#else
+			#include <gl.h>
+			#include <glu.h>
+		#endif
 	#endif
 #else
-	#include <GL/gl.h>
-	#include <GL/glu.h>
+	#ifdef USE_GLEW
+		#include <GL/glew.h> // IMPORTANT, must be declared before gl (and replace gl) !
+	#else
+		#include <GL/gl.h>
+		#include <GL/glu.h>
+	#endif
 #endif
+
 #include "Vector3D.h"
 #include "Vector4D.h"
 #include "Material.h"
@@ -24,6 +38,8 @@
 //#define USE_VBO
 
 #ifdef USE_VBO
+
+#ifndef USE_GLEW
 
 #ifndef _WIN32
 // For Linux, add this define to the project
@@ -38,7 +54,10 @@ extern PFNGLBUFFERDATAPROC glBufferData;
 extern PFNGLBUFFERSUBDATAPROC glBufferSubData;
 extern PFNGLDELETEBUFFERSPROC glDeleteBuffers;
 extern PFNGLGETBUFFERPARAMETERIVPROC glGetBufferParameteriv;
+extern PFNGLACTIVETEXTUREPROC glActiveTexture;
 #endif
+
+#endif // USE_GLEW
 
 void initOGL();
 GLuint createVBO(const void *data, int dataSize, GLenum target = GL_ARRAY_BUFFER, GLenum usage = GL_STATIC_DRAW);
@@ -50,7 +69,7 @@ namespace GLScene
 
 typedef enum {
 	otAxis, otCube, otCuboid, otCylinder, otCone, otSphere,
-	otEllipsoid, otArrow, otGrid, otSpin, otNone
+	otEllipsoid, otArrow, otGrid, otSpin, otSurface, otNone
 } TObjectType;
 
 typedef enum {
@@ -289,6 +308,7 @@ class TObject3D {
 // Random functions
 GLfloat GLRand(void);
 GLfloat GLRand(GLfloat max);
+TVector4D RandomColor(void);
 
 } // namespace GLScene
 

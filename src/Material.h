@@ -2,7 +2,6 @@
 #define _MATERIAL_3D_H
 
 #include "FaceProperties.h"
-#include "Vector4D.h"
 
 namespace GLScene
 {
@@ -33,8 +32,6 @@ class TMaterial
 		TGLFaceProperties BackProperties;
 		TGLFaceProperties FrontProperties;
 };
-
-TVector4D RandomColor(void);
 
 } // namespace GLScene
 

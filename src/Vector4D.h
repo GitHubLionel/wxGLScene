@@ -5,15 +5,13 @@
 #if defined(__WXMAC__)
 	#ifdef __DARWIN__
 		#include <OpenGL/gl.h>
-		#include <OpenGL/glu.h>
 	#else
 		#include <gl.h>
-		#include <glu.h>
 	#endif
 #else
 	#include <GL/gl.h>
-	#include <GL/glu.h>
 #endif
+
 #include "Vector3D.h"
 #include <cmath>
 #include <initializer_list> // for std::initializer_list

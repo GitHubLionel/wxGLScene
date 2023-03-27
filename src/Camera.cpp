@@ -12,7 +12,7 @@ TCamera::~TCamera()
 
 void TCamera::draw()
 {
-  gluLookAt(x, y, z, tX, tY, tZ, 0, 1, 0);
+//  gluLookAt(x, y, z, tX, tY, tZ, 0, 1, 0);
 }
 
 void TCamera::move(GLfloat angle)

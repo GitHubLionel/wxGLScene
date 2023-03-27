@@ -14,7 +14,7 @@
 // of vertices is 24 (6 sides * 4 verts), and 72 floats in the vertex array
 // since each vertex has 3 components (x,y,z) (= 24 * 3)
 // Vertex coordinates interleaved with normal in format : GL_N3F_V3F
-GLfloat unit_cube[] = {
+static GLfloat unit_cube[] = {
 		 0.0f,  0.0f,  1.0f,  0.5f,  0.5f,  0.5f,
 		 0.0f,  0.0f,  1.0f, -0.5f,  0.5f,  0.5f,
 		 0.0f,  0.0f,  1.0f, -0.5f, -0.5f,  0.5f,
@@ -43,7 +43,7 @@ GLfloat unit_cube[] = {
 
 // index array for glDrawElements()
 // A cube has 36 indices = 6 sides * 2 tris * 3 verts
-const GLuint indices[] = {
+static const GLuint indices[] = {
 		0, 1, 2, 			2, 3, 0,    // v0-v1-v2, v2-v3-v0 (front)
 		4, 5, 6, 			6, 7, 4,    // v0-v3-v4, v4-v5-v0 (right)
 		8, 9, 10, 		10, 11, 8,    // v0-v5-v6, v6-v1-v0 (top)
@@ -53,8 +53,8 @@ const GLuint indices[] = {
 };
 
 #ifdef USE_VBO
-GLuint vboId = 0;  // ID of VBO for vertex and normal interleaved arrays
-GLuint iboId = 0;  // ID of VBO for index array
+static GLuint vboId = 0;  // ID of VBO for vertex and normal interleaved arrays
+static GLuint iboId = 0;  // ID of VBO for index array
 #endif
 
 TCube::TCube(GLfloat _size, const TVector3D &pos) :
