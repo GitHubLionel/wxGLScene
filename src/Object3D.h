@@ -53,6 +53,8 @@ extern PFNGLBINDBUFFERPROC glBindBuffer;
 extern PFNGLBUFFERDATAPROC glBufferData;
 extern PFNGLBUFFERSUBDATAPROC glBufferSubData;
 extern PFNGLDELETEBUFFERSPROC glDeleteBuffers;
+extern PFNGLMAPBUFFERPROC glMapBuffer;
+extern PFNGLUNMAPBUFFERPROC glUnmapBuffer;
 extern PFNGLGETBUFFERPARAMETERIVPROC glGetBufferParameteriv;
 extern PFNGLACTIVETEXTUREPROC glActiveTexture;
 #endif
@@ -61,6 +63,7 @@ extern PFNGLACTIVETEXTUREPROC glActiveTexture;
 
 void initOGL();
 GLuint createVBO(const void *data, int dataSize, GLenum target = GL_ARRAY_BUFFER, GLenum usage = GL_STATIC_DRAW);
+void updateVBO(int id, const void *data, int dataSize, GLenum target = GL_ARRAY_BUFFER);
 
 #endif
 

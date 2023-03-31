@@ -11,6 +11,8 @@ PFNGLBINDBUFFERPROC glBindBuffer = NULL;
 PFNGLBUFFERDATAPROC glBufferData = NULL;
 PFNGLBUFFERSUBDATAPROC glBufferSubData = NULL;
 PFNGLDELETEBUFFERSPROC glDeleteBuffers = NULL;
+PFNGLMAPBUFFERPROC glMapBuffer = NULL;
+PFNGLUNMAPBUFFERPROC glUnmapBuffer = NULL;
 PFNGLGETBUFFERPARAMETERIVPROC glGetBufferParameteriv = NULL;
 PFNGLACTIVETEXTUREPROC glActiveTexture = NULL;
 
@@ -25,6 +27,8 @@ void initOGL()
 		glBufferData = (PFNGLBUFFERDATAPROC) wglGetProcAddress("glBufferData");
 		glBufferSubData = (PFNGLBUFFERSUBDATAPROC) wglGetProcAddress("glBufferSubData");
 		glDeleteBuffers = (PFNGLDELETEBUFFERSPROC) wglGetProcAddress("glDeleteBuffers");
+		glMapBuffer = (PFNGLMAPBUFFERPROC) wglGetProcAddress("glMapBuffer");
+		glUnmapBuffer = (PFNGLUNMAPBUFFERPROC) wglGetProcAddress("glUnmapBuffer");
 		glGetBufferParameteriv = (PFNGLGETBUFFERPARAMETERIVPROC) wglGetProcAddress("glGetBufferParameteriv");
 		glActiveTexture = (PFNGLACTIVETEXTUREPROC) wglGetProcAddress("glActiveTexture");
 #pragma GCC diagnostic pop
@@ -68,6 +72,15 @@ GLuint createVBO(const void *data, int dataSize, GLenum target, GLenum usage)
 
 	// return VBO id
 	return id;
+}
+
+void updateVBO(int id, const void *data, int dataSize, GLenum target)
+{
+	glBindBuffer(target, id);                                 // activate vbo id to use
+	float* ptr = (float*)glMapBuffer(target, GL_WRITE_ONLY);  // map buffer
+	memcpy(ptr, data, dataSize);                              // copy data
+	glUnmapBuffer(target);                                    // unmap it after use
+	glBindBuffer(target, 0);                                  // unactivate vbo after use
 }
 
 #endif // USE_VBO

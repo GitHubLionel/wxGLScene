@@ -4,6 +4,7 @@
 namespace GLScene
 {
 
+#define GLColor_NULL	{-1.0, -1.0, -1.0, -1.0}
 #define GLColor_aliceblue	{0.941, 0.973, 1.000, 1.000}
 #define GLColor_antiquewhite	{0.980, 0.922, 0.843, 1.000}
 #define GLColor_aqua		{0.000, 1.000, 1.000, 1.000}

@@ -703,11 +703,11 @@ void wxGLScene::OnChar(wxKeyEvent &event)
 			break;
 
 		case WXK_UP:
-			CenterUpDown(0.5);
+			CenterUpDown(0.20f);
 			break;
 
 		case WXK_DOWN:
-			CenterUpDown(-0.5);
+			CenterUpDown(-0.20f);
 			break;
 
 		case WXK_PAGEUP:
@@ -729,12 +729,12 @@ void wxGLScene::OnChar(wxKeyEvent &event)
 			break;
 		case 'u':
 		case 'U':
-			CenterUpDown(0.5f);
+			CenterUpDown(0.20f);
 			break;
 
 		case 'd':
 		case 'D':
-			CenterUpDown(-0.5f);
+			CenterUpDown(-0.20f);
 			break;
 
 		default:

@@ -23,10 +23,12 @@ typedef std::function<double(double x, double y)> TFunctionZ;
 class TSurface: public TObject3D
 {
 	public:
-		TSurface(GLuint dimX, GLuint dimY, const TVector3D &pos = GLDefaultPosition);
+		TSurface(GLuint dimX, GLuint dimY, bool useMatColor = true, const TVector3D &pos = GLDefaultPosition);
 		virtual ~TSurface();
 
 		void SetDimension(GLuint dimX, GLuint dimY, bool recompute = false);
+		void SetColor(const TVector4D &begin, const TVector4D &end);
+		void SetNormal(bool use);
 
 		void setFunctionZ(TFunctionZ fonc)
 		{
@@ -43,14 +45,17 @@ class TSurface: public TObject3D
 		GLuint sizeX, sizeY;
 		TVector3D *surface = NULL;
 		TVector3D *normals = NULL;
+		TVector3D *colors = NULL;
 		GLuint *indices = NULL;
 		GLuint sizeLength;
 		GLuint indiceLength;
 		bool SurfaceComputed;
+		bool useNormal;
 
 #ifdef USE_VBO
 		GLuint vboId = 0;  // ID of VBO for vertex arrays
 		GLuint nboId = 0;  // ID of VBO for normal arrays
+		GLuint cboId = 0;  // ID of VBO for normal arrays
 		GLuint iboId = 0;  // ID of VBO for index array
 		void FreeVBO(void);
 #endif
@@ -66,10 +71,20 @@ class TSurface: public TObject3D
 		double _yMin;
 		double _yMax;
 
+		// For color
+		double Maximum, Minimum;
+		TVector4D colorBegin;
+		TVector4D colorEnd;
+		TVector4D colorDelta;
+		bool colorUpdated;
+		bool useColor;
+
 		void InitializeArray(void);
 		void ComputeIndices(void);
 		void ComputeNormals(void);
+		void ComputeColors(void);
 		void FreeArray(void);
+		TVector3D CreateColor(double Value);
 };
 
 } // namespace GLScene
