@@ -336,16 +336,22 @@ void wxGLScene::OnTimer(wxTimerEvent &WXUNUSED(event))
 
 void wxGLScene::StartTimer(int milliseconds)
 {
-	m_timer.Bind(wxEVT_TIMER, &wxGLScene::OnTimer, this);
-	m_timer.Start(milliseconds);
+	if (!m_timer)
+	  m_timer = new wxTimer(this);
+	m_timer->Bind(wxEVT_TIMER, &wxGLScene::OnTimer, this);
+	m_timer->Start(milliseconds);
 	timmerRunning = true;
 }
 
 void wxGLScene::StopTimer(void)
 {
-	m_timer.Stop();
-	m_timer.Unbind(wxEVT_TIMER, &wxGLScene::OnTimer, this, m_timer.GetId());
+	if (!m_timer)
+		return;
+	m_timer->Stop();
+	m_timer->Unbind(wxEVT_TIMER, &wxGLScene::OnTimer, this, m_timer->GetId());
 	timmerRunning = false;
+	delete m_timer;
+	m_timer = NULL;
 }
 
 /* ================================================================== */
@@ -1018,7 +1024,7 @@ const char *wxGLScene::GetGlewVersion()
 bool wxGLScene::MPEG_Initialize(const wxString &filename, const wxString &codec_name, int fps, int bit_rate)
 {
 	LockSize(true);
-	FFMpeg_LastError = ffmpeg_encoder_start(filename.c_str(), codec_name, fps, bit_rate, GetWidth(), GetHeight());
+	FFMpeg_LastError = ffmpeg_encoder_start((char const*)filename.mb_str(), (char const*)codec_name.mb_str(), fps, bit_rate, GetWidth(), GetHeight());
 	FFMpeg_OK = (FFMpeg_LastError == ffmpeg_OK);
 	if (!FFMpeg_OK)
 		LockSize(false);
@@ -1032,7 +1038,7 @@ bool wxGLScene::MPEG_Initialize(const wxString &filename, const wxString &codec_
 bool wxGLScene::MPEG_Initialize(const wxString &filename, int codec_id, int fps, int bit_rate)
 {
 	LockSize(true);
-	FFMpeg_LastError = ffmpeg_encoder_start(filename.c_str(), codec_id, fps, bit_rate, GetWidth(), GetHeight());
+	FFMpeg_LastError = ffmpeg_encoder_start((char const*)filename.mb_str(), codec_id, fps, bit_rate, GetWidth(), GetHeight());
 	FFMpeg_OK = (FFMpeg_LastError == ffmpeg_OK);
 	if (!FFMpeg_OK)
 		LockSize(false);

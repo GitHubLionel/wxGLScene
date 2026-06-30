@@ -59,9 +59,9 @@ class TGrid: public TObject3D
 		int sizeX, sizeY, sizeZ;
 		GLfloat CenterX, CenterY, CenterZ;
 		GLfloat colorBlack[4] = {0.0, 0.0, 0.0, 1.0};
-		GLfloat colorRed[4] = {1.0, 0.0, 0.0, 1.0};
-		GLfloat colorGreen[4] = {0.0, 1.0, 0.0, 1.0};
-		GLfloat colorBlue[4] = {0.0, 0.0, 1.0, 1.0};
+//		GLfloat colorRed[4] = {1.0, 0.0, 0.0, 1.0};
+//		GLfloat colorGreen[4] = {0.0, 1.0, 0.0, 1.0};
+//		GLfloat colorBlue[4] = {0.0, 0.0, 1.0, 1.0};
 		bool gridX;
 		bool gridY;
 		bool gridZ;

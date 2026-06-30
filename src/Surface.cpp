@@ -258,7 +258,10 @@ bool TSurface::LoadSurface(const char *filename)
 	} while ((!feof(file)) && (k < sizeLength));
 
 	// try read one more line to verify eof
-	fgets(line, 128, file);
+	if (fgets(line, 128, file) == NULL) {
+		; // Nothing to do
+	}
+
 	// Ok if eof is reached and we have sizeLength = dimX*dimY datas
 	bool success = ((feof(file)) && (k == sizeLength));
 

@@ -78,7 +78,7 @@ class wxGLScene: public wxGLCanvas
 		wxGLContext *m_glRC;
 		wxMenu m_popmenu;
 		wxStaticText *m_InfoClick;
-		wxTimer m_timer;
+		wxTimer *m_timer = NULL;
 
 		bool PolygonModeLine = false;
 		bool IsFullScreen = false;
@@ -215,7 +215,7 @@ class wxGLScene: public wxGLCanvas
 
 		// FFMPEG encoder
 #ifdef USE_FFMPEG
-    bool MPEG_Initialize(const wxString &filename, const wxString &codec_name = _("mpeg2video"), int fps = 25, int bit_rate = 400);
+    bool MPEG_Initialize(const wxString &filename, const wxString &codec_name = _T("mpeg2video"), int fps = 25, int bit_rate = 400);
     bool MPEG_Initialize(const wxString &filename, int codec_id = AV_CODEC_ID_MPEG2VIDEO, int fps = 25, int bit_rate = 400);
     void MPEG_Close(void);
     void MPEG_Update(void);
